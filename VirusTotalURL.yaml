@@ -15,7 +15,7 @@ paths:
             summary: Get Virus Total URL Information for a particular URL.
             parameters:
                 - in: path
-                  name: URL
+                  name: id
                   schema:
                       type: string
                   required: true
