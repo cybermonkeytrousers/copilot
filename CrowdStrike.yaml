@@ -1,0 +1,59 @@
+openapi: 3.0.0
+info:
+  title: CrowdStrike Threat Intelligence API
+  description: |
+    The CrowdStrike Threat Intelligence API allows users to query and retrieve information about Indicators of Compromise (IOCs) such as IP addresses, domains, hashes, and file paths.
+  version: 1.0.0
+servers:
+  - url: https://api.crowdstrike.com
+    description: Production server
+paths:
+  /indicators:
+    get:
+      summary: Get IOCs
+      description: Retrieve Indicators of Compromise (IOCs) based on specified parameters.
+      parameters:
+        - name: type
+          in: query
+          description: The type of IOC to query (e.g., ip_address, domain, hash).
+          required: true
+          schema:
+            type: string
+        - name: value
+          in: query
+          description: The value of the IOC to query.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response containing IOC information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IOCResponse'
+components:
+  schemas:
+    IOCResponse:
+      type: object
+      properties:
+        iocs:
+          type: array
+          items:
+            $ref: '#/components/schemas/IOC'
+    IOC:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of IOC (e.g., ip_address, domain, hash).
+        value:
+          type: string
+          description: The value of the IOC.
+        description:
+          type: string
+          description: Additional information about the IOC.
+        created_at:
+          type: string
+          format: date-time
+          description: The timestamp when the IOC was created.
