@@ -5,7 +5,7 @@ info:
     The CrowdStrike Threat Intelligence API allows users to query and retrieve information about Indicators of Compromise (IOCs) such as IP addresses, domains, hashes, and file paths.
   version: 1.0.0
 servers:
-  - url: https://api.crowdstrike.com
+  - url: https://api.us-2.crowdstrike.com
     description: Production server
 paths:
   /indicators:
