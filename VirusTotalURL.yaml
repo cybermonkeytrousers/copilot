@@ -2,7 +2,7 @@ openapi: 3.0.0
 
 info:
     title: Get Virus Total URL Information
-    description: Get Information about an URL from Virus Total
+    description: Get Information about a URL from Virus Total
     version: "v1"
 
 servers:
@@ -20,7 +20,7 @@ paths:
                       type: string
                       format: base64
                   required: true
-                  description: The URL to lookup              
+                  description: The URL identifier or base64 representation of the URL to lookup              
             responses:
                 "200":
                     description: OK
@@ -34,21 +34,47 @@ components:
         getVTURLResponse:
             type: object
             properties:
-                attributes:
+                data:
                     type: object
                     properties:
-                        jarm:
+                        id:
                             type: string
-                        network:
+                            description: The unique identifier of the URL in VirusTotal.
+                        type:
                             type: string
-                        last_https_certificate_date:
-                            type: integer
-                        tags:
-                            type: array
-                        crowdsourced_context:
-                            type: array
-                            items:
-                                type: object
-                                properties:
-                                    source:
+                            description: The type of the URL (e.g., "URL").
+                        attributes:
+                            type: object
+                            properties:
+                                jarm:
+                                    type: string
+                                    description: A unique fingerprint computed based on the SSL/TLS handshake.
+                                network:
+                                    type: string
+                                    description: Network information associated with the URL.
+                                last_https_certificate_date:
+                                    type: integer
+                                    description: The date when the last HTTPS certificate was observed.
+                                tags:
+                                    type: array
+                                    description: Tags associated with the URL.
+                                    items:
                                         type: string
+                                crowdsourced_context:
+                                    type: array
+                                    description: Crowdsourced context information.
+                                    items:
+                                        type: object
+                                        properties:
+                                            source:
+                                                type: string
+                                                description: The source of the crowdsourced context.
+                meta:
+                    type: object
+                    properties:
+                        status_code:
+                            type: integer
+                            description: The HTTP status code of the response.
+                        status_message:
+                            type: string
+                            description: A message providing additional information about the status.
