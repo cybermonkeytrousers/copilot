@@ -62,7 +62,7 @@ paths:
 
           required: true
 
-         description: Get the IP address to lookup in AlienVault.
+          description: Get the IP address to lookup in AlienVault.
 
   /IPv4/{ip}/geo/:
 
